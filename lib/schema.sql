@@ -19,9 +19,3 @@ CREATE TABLE users (
   username text PRIMARY KEY,
   password text NOT NULL
 );
-
--- -- Re create database
--- dropdb todo_lists
--- createdb todo_lists
--- psql -d todo_lists < lib/schema.sql
--- psql -d todo_lists < lib/seed-data.sql
