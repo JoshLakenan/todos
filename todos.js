@@ -41,23 +41,6 @@ app.use((req, res, next) => {
   next();
 });
 
-
-
-// // Initialize req.session.todoLists as a list of TodoList objects
-// const SeedData = require("./lib/seed-data"); // temporary code!!
-// app.use((req, res, next) => {
-//   req.session.todoLists = SeedData; // Temporary code!
-//   let todoLists = [];
-//   if ("todoLists" in req.session) {
-//     req.session.todoLists.forEach(todoList => {
-//       todoLists.push(TodoList.makeTodoList(todoList));
-//     });
-//   }
-
-//   req.session.todoLists = todoLists;
-//   next();
-// });
-
 // Extract session info
 app.use((req, res, next) => {
   res.locals.username = req.session.username;

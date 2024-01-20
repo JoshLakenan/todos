@@ -1,3 +1,8 @@
+INSERT INTO users (username, password)
+  VALUES ('admin', '$2b$10$8G0ZrgdgQFFrfHXW1Ofv7eeAlxH5nWINVg.Ft4AzXYD1NOd0jHmJ2'),
+         ('developer', '$2b$10$lMrzapII6qw8HRm.rvKwRO5nIzQsy0ujBisFq7FF/wmVwPwggwhT6'),
+         ('somebody', 'knock-knock');
+
 INSERT INTO todolists (id, title, username)
   VALUES (1, 'Work Todos', 'admin'),
          (2, 'Home Todos', 'admin'),

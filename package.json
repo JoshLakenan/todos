@@ -8,6 +8,8 @@
   },
   "scripts": {
     "start": "npx nodemon todos.js",
+    "data_setup": "psql -d todo_lists < lib/schema.sql && psql -d todo_lists < lib/seed-data.sql",
+    "data_reset": "psql -d todo_lists < lib/drop_tables.sql && psql -d todo_lists < lib/schema.sql && psql -d todo_lists < lib/seed-data.sql",
     "heroku-postbuild": "npm install --production"
   },
   "author": "",
