@@ -6,6 +6,8 @@ const session = require("express-session");
 const { body, validationResult } = require("express-validator");
 const store = require("connect-loki");
 const PgPersistence = require("./lib/pg-persistence");
+const { connectToDatabase, closeDatabaseConnection } = require('./lib/mongo-query.js');
+
 const catchError = require("./lib/catch-error");
 
 const app = express();
@@ -343,6 +345,23 @@ app.post("/users/signin",
       session.signedIn = true;
       req.flash("info", "Welcome!");
       res.redirect("/lists");
+
+
+      //Save login Info to mongoDB
+      const db = await connectToDatabase();
+      const loginsCollection = db.collection('logins');
+      const login = {
+        username: username,
+        date: new Date(),
+      };
+      await loginsCollection.insertOne(login);
+
+      //find the most recent login for the user and display it using req.flash
+      const mostRecentLogin = await loginsCollection.find({username: username}).sort({date: -1}).limit(1).toArray();
+      const mostRecentLoginDate = mostRecentLogin[0].date;
+      req.flash("info", `Your most recent login was on ${mostRecentLoginDate}`);
+      console.log('Login recorded for user:', username);
+      closeDatabaseConnection();
     }
   })
 );
